@@ -1,0 +1,146 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+    width: 20px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #fff;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-button{
+    background: transparent;
+    height: 10px;
+}
+
+body{
+    background: #222;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.header{
+    margin: 10px auto 20px;
+    text-align: center;
+    position: relative;
+    width: 95%;
+}
+
+h1{
+    text-align: center;
+    color: #fff;
+    font-weight: normal;
+    display: inline-block;
+}
+
+.input{
+    position: absolute;
+    top: 0;
+    right: 2px;
+    height: 100%;
+    padding-top: 12px;
+}
+
+.input label{
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;;
+    color: #000;
+    pointer-events: none;
+    font-size: .9em;
+}
+
+#input{
+    font-family: inherit;
+    width: 150px;
+    padding: 4px 5px;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid #000;
+    color: #fff;
+    transition: .3s ease-in-out;
+}
+
+#input:focus,
+#input:valid{
+    outline: none;
+    border-bottom-color: #fff;
+}
+
+.input label span{
+    user-select: none;
+    min-width: 5px;
+    display: inline-block;
+    transition: transform .3s cubic-bezier(0.68, -0.55, 0.265, 1.45), color .2s ease;
+}
+
+#input:focus + label span,
+#input:valid + label span{
+    color: #fff;
+    transform: translateY(-20px);
+}
+
+.list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.list .item{
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.list .color-details{
+    min-width: 200px;
+    margin-right: 10px;
+    display: flex;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.list .color{
+    min-width: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+   
+    color: #fff;
+    text-shadow: 1px 1px 1px #000, 1px 1px 3px #444;
+    text-transform: uppercase;
+}
+
+.list .color span{
+    opacity: .8;
+}
+
+::-webkit-resizer{
+    background: transparent;
+}
+
+.list .color-gradient{
+    width: 100%;
+    min-width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    resize: horizontal;
+    overflow: hidden;
+}
+
+@keyframes go-up{
+    to{
+        transform: translateY(-30px);
+    }
+}
