@@ -3,19 +3,50 @@
 <head>
     <title>Gradient</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
-    <div>
-        <div class="header">
-            <h1>Linear Gradient</h1>
-            <div class="input">
-                <input type="text" id="input" type="Type a hex" required>
-                <label>Find your color...</label>
+    <div class="header">
+        <button class="nav-button open">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav black">
+            <div class="nav red">
+                <div class="nav white">
+                    <button class="nav-button close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="input-nav">
+                        <input type="text" id="input-nav" type="Type a hex" required>
+                        <label>Find your color...</label>
+                    </div>
+                    <ul class="settings">
+                        <li>
+                            <label for="check-show-detail">Show details for all</label>
+                            <input id="check-show-detail" type="checkbox">
+                        </li>
+                        <li>
+                            <label for="input-deg">Rotation: 147</label>
+                            <input id="input-deg" type="range" min="0" max="360" value="147">
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <ul class="list"></ul>
+        <h1>Linear Gradient</h1>
+        <div class="input">
+            <input type="text" id="input" type="Type a hex" required>
+            <label>Find your color...</label>
+        </div>
     </div>
+    <ul class="list"></ul>
 
+    <div class="loading">
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+    </div>
     <script src="script.js"></script>
 </body>
+
 </html>
