@@ -407,7 +407,7 @@ input[type="text"]:valid + label span{
     }
     .nav.black{
         top: 8%;
-        width: 50vw;
+        width: 55vw;
     }
     .list{
         justify-content: space-between;
@@ -481,7 +481,7 @@ input[type="text"]:valid + label span{
         font-size: 2.3em;
         width: 45vw;
         display: inline-block;
-        margin-bottom: 8px;
+        margin-bottom: 15px;
     }
     .settings li{
         margin-top: 50px;
