@@ -577,7 +577,7 @@ const color_list = [
 
 window.addEventListener('load', ()=>{
     
-    for(let i = 0; i < 16; i++){
+    for(let i = 0; i < 18; i++){
         show_next.next();
     }
 
@@ -589,7 +589,9 @@ window.addEventListener('load', ()=>{
     document.addEventListener('scroll', showLoading);
     dragElement(nav_open_btn);
     nav_open_btn.addEventListener('click', openNav);
+    nav_open_btn.addEventListener('touchend', openNav);
     nav_close_btn.addEventListener('click', closeNav);
+    nav_close_btn.addEventListener('touchstart', closeNav);
     show_detail_btn.addEventListener('change', showAllDetail);
     input.addEventListener('keyup', find);
     input_nav.addEventListener('keyup', find);
@@ -598,7 +600,7 @@ window.addEventListener('load', ()=>{
 })
 
 function changeLabelRange(){
-    input_deg.parentNode.querySelector('label').innerText = `Rotation: ${input_deg.value}`;
+    input_deg.parentNode.querySelector('label').textContent = `Rotation: ${input_deg.value}`;
 }
 
 function changeRotation(){
@@ -611,12 +613,15 @@ function changeRotation(){
 }
 
 function showLoading(e){
+    if(e.cancelable){
+        e.preventDefault();
+    }
     const {clientHeight, scrollTop, scrollHeight} = document.documentElement;
     
-    if(clientHeight + scrollTop + 1 >= scrollHeight){
+    if(clientHeight + scrollTop + 2 >= scrollHeight){
         loading.classList.add('show');
         setTimeout(()=>{
-            for(let i = 0; i < 16; i++){
+            for(let i = 0; i < 18; i++){
                 show_next.next();
             }
             loading.classList.remove('show');
@@ -632,14 +637,14 @@ function* more(){
 
 function addNew(color_1, color_2){
     const li = document.createElement('li');
-
+    // ontouchstart="showDetail2(this)"
     li.classList.add('item');
 
     li.innerHTML = `
         <div class="color-gradient" style="background: linear-gradient(${default_rotation}deg, #${color_1}, #${color_2})"></div>
         <div class="color-details">
-            <div class="color" style="background: #${color_1}"><span>#${color_1}</span></div>
-            <div class="color" style="background: #${color_2}"><span>#${color_2}</span></div>
+            <div class="color ${show_detail_btn.checked ? 'show' : ''}" style="background: #${color_1}"><span>#${color_1}</span></div>
+            <div class="color ${show_detail_btn.checked ? 'show' : ''}" style="background: #${color_2}"><span>#${color_2}</span></div>
         </div>
     `;
 
@@ -675,22 +680,20 @@ function showDetail(e){
     }
 }
 
-function openNav(){
+function openNav(e){
     nav.forEach(el => el.classList.add('visible'));
-    nav_open_btn.style.opacity = '0';
+    nav_open_btn.classList.add('off');
 }
 
 function closeNav(){
     nav.forEach(el => el.classList.remove('visible'));
-    nav_open_btn.style.opacity = '1';
+    nav_open_btn.classList.remove('off');
 }
 
 function autoCloseNav(e){
     e.stopPropagation();
-    if(e.clientX > 400 && !e.target.classList.contains('nav-button')){
-        if(nav[0].classList.contains('visible')){
-            closeNav();
-        }
+    if(e.target !== nav_open_btn && !nav[2].contains(e.target) && nav[0].classList.contains('visible')){
+        closeNav();
     }
 }
 
@@ -713,29 +716,38 @@ function dragElement(element) {
     element.ontouchstart = dragMouseDown;
   
     function dragMouseDown(e = window.event) {
-        e.preventDefault();
-        posX = e.clientX;
-        posY = e.clientY;   
+        if(e.cancelable){
+            e.preventDefault();
+        }
+        posX = e.clientX || e.touches[0].clientX;
+        posY = e.clientY || e.touches[0].clientY;   
+
         document.onmouseup = closeDragElement;
         document.ontouchend = closeDragElement;
         document.onmousemove = elementDrag;
         document.ontouchmove = elementDrag;
+
     }
   
     function elementDrag(e = window.event) {
+        element.removeEventListener('touchend', openNav);
         element.removeEventListener('click', openNav);
-        e.preventDefault();
-        
-        top_px = e.clientY - posY;
-        left_px = e.clientX - posX;
+   
+        if(e.cancelable){
+            e.preventDefault();
+        }
+    
+        top_px = (e.clientY !== undefined ? e.clientY : e.touches[0].clientY) - posY;
+        left_px = (e.clientX !== undefined ? e.clientX : e.touches[0].clientX) - posX;
+
         x = top_px + element.offsetTop;
         y = left_px + element.offsetLeft;
 
         element.style.top = (x > 0 && x < document.documentElement.clientHeight - 30 ? x : x - top_px) + "px";
         element.style.left = (y > 0 && y < document.body.clientWidth - 30 ? y : y - left_px) + "px";
 
-        posX = e.clientX;
-        posY = e.clientY;
+        posX = e.clientX || e.touches[0].clientX;
+        posY = e.clientY || e.touches[0].clientY;   
     }
   
     function closeDragElement() {
@@ -743,6 +755,9 @@ function dragElement(element) {
         document.ontouchend = null;
         document.onmousemove = null;
         document.ontouchmove = null;
-        setTimeout(()=>element.addEventListener('click', openNav), 0);
+        setTimeout(()=>{
+            element.addEventListener('click', openNav);
+            element.addEventListener('touchend', openNav);
+        }, 0);
     }
   }

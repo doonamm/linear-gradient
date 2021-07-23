@@ -34,10 +34,12 @@ body{
     text-align: center;
     position: relative;
     width: 95%;
+    font-size: 16px;
 }
 
 .fas{
-    pointer-events: none;   
+    pointer-events: none;
+    /* user-select: none; */
 }
 
 .nav-button{
@@ -47,12 +49,18 @@ body{
     font-size: 30px;
     cursor: pointer;
     transition: opacity .2s ease;
+    outline: none;
 }
 
 .nav-button.open{
     position: fixed;
     top: 29px;
     left: 15px;
+}
+
+.nav-button.open.off{
+    pointer-events: none;
+    opacity: 0;
 }
 
 .nav-button.close{
@@ -131,7 +139,6 @@ body{
     align-items: center;
     padding-top: 100px;
     color: #fff;
-    text-shadow: 1px 1px 1px #222;
 }
 
 .settings li{
@@ -304,10 +311,16 @@ input[type="text"]:valid + label span{
     overflow: hidden;
 }
 
-.list .color-gradient:hover + .color-details .color,
 .list .color.show{
     height: 100%;
     opacity: 1;
+}
+
+@media only screen and (min-device-width: 500px){
+    .list .color-gradient:hover + .color-details .color{
+        height: 100%;
+        opacity: 1;
+    }
 }
 
 ::-webkit-resizer{
@@ -367,5 +380,83 @@ input[type="text"]:valid + label span{
 @media only screen and (max-width: 750px){
     .input{
         display: none;
+    }
+}
+
+@media only screen and (max-device-width: 500px){
+    body{
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .input{
+        display: none;
+    }
+    h1{
+        margin-top: 30px;
+        font-size: 80px;
+    }
+    .nav{
+        height: 30vh;
+    }
+    .nav-button.open{
+        font-size: 60px;
+        top: 40px;
+        left: 20px;
+    }
+    .nav-button.close{
+        font-size: 40px;
+    }
+    .nav.black{
+        top: 8%;
+        width: 50vw;
+    }
+    .list{
+        justify-content: space-between;
+    }
+    .list .color-gradient{
+        width: 280px;
+        height: 280px;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .list .color-details{
+        font-size: 22px;
+        border-radius:0 0 20px 20px;
+    }
+    #input-nav{
+        width: 270px;
+        font-size: 1.7em;
+        padding: 8px;
+    }
+    .input-nav{
+        top: 70px;
+    }
+    .input-nav label{
+        top: 22px;
+        font-size: 1.7em;
+    }   
+    #check-show-detail{
+        width: 32px;
+        height: 32px;
+        transform: translateY(6px);
+    }
+    #input-deg{
+        width: 100%;
+        height: 100%;
+        transform: translate(0, 0);
+    }
+    .settings{
+        padding-top: 155px;
+    }
+    .settings label{
+        font-size: 1.7em;
+    }
+    .settings li{
+        margin-top: 60px;
+    }
+    input[type="text"]:focus + label span,
+    input[type="text"]:valid + label span{
+        color: #fff;
+        transform: translateY(-30px);
     }
 }
