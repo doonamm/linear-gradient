@@ -12,6 +12,7 @@ const loading = document.querySelector('.loading');
 
 var show_next = more();
 var dragging = true;
+var showing = false;
 var default_rotation = 147;
 
 const color_list = [
@@ -616,16 +617,21 @@ function showLoading(e){
     if(e.cancelable){
         e.preventDefault();
     }
+
     const {clientHeight, scrollTop, scrollHeight} = document.documentElement;
     
-    if(clientHeight + scrollTop + 5 >= scrollHeight){
-        loading.classList.add('show');
-        setTimeout(()=>{
-            for(let i = 0; i < 18; i++){
-                show_next.next();
-            }
-            loading.classList.remove('show');
-        }, 500);
+    if(clientHeight + scrollTop + 10 >= scrollHeight){
+        if(!showing){
+            showing = true;
+            loading.classList.add('show');
+            setTimeout(()=>{
+                for(let i = 0; i < 18; i++){
+                    show_next.next();
+                }
+                loading.classList.remove('show');
+                showing = false;
+            }, 500);
+        }
     }
 }
 
