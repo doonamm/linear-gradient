@@ -620,7 +620,7 @@ function showLoading(e){
 
     const {clientHeight, scrollTop, scrollHeight} = document.documentElement;
     
-    if(clientHeight + scrollTop + 60 >= scrollHeight){
+    if(clientHeight + scrollTop + 100 >= scrollHeight){
         if(!showing){
             showing = true;
             loading.classList.add('show');
