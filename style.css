@@ -429,7 +429,7 @@ input[type="text"]:valid + label span{
     }
     .list .color{
         width: 140px;
-        text-shadow: none;
+        text-shadow: 1px 1px 2px #000, -1px -1px 2px #000;
     }
     #input-nav{
         width: 380px;
