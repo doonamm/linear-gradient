@@ -398,6 +398,7 @@ input[type="text"]:valid + label span{
         min-height: 38vh;
         max-height: 42vh;
         height: 38vh;
+        transition: transform .3s ease;
     }
     .nav-button.open{
         font-size: 80px;
