@@ -618,7 +618,7 @@ function showLoading(e){
     }
     const {clientHeight, scrollTop, scrollHeight} = document.documentElement;
     
-    if(clientHeight + scrollTop + 2 >= scrollHeight){
+    if(clientHeight + scrollTop + 5 >= scrollHeight){
         loading.classList.add('show');
         setTimeout(()=>{
             for(let i = 0; i < 18; i++){
