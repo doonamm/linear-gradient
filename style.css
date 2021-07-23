@@ -395,10 +395,12 @@ input[type="text"]:valid + label span{
         font-size: 80px;
     }
     .nav{
-        height: 35vh;
+        min-height: 38vh;
+        max-height: 42vh;
+        height: 38vh;
     }
     .nav-button.open{
-        font-size: 90px;
+        font-size: 80px;
         top: 40px;
         left: 20px;
     }
@@ -475,13 +477,13 @@ input[type="text"]:valid + label span{
     }
 
     .settings{
-        padding-top: 180px;
+        padding-top: 170px;
     }
     .settings label{
         font-size: 2.3em;
-        width: 45vw;
-        display: inline-block;
-        margin-bottom: 15px;
+        width: 49vw;
+        display: block;
+        margin-bottom: 20px;
     }
     .settings li{
         margin-top: 50px;
